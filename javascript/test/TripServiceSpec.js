@@ -10,9 +10,6 @@ let loggedUser = new User('John');
 let targetUser = new User('Mery');
 
 class TestTripService extends TripService {
-  _getLoggedUser() {
-    return loggedUser;
-  }
   _findTripsByUser(user) {
     return user.trips;
   }
@@ -25,15 +22,13 @@ describe('TripService', () => {
   });
 
   it('should trow exception when user is not logged in', () => {
-    loggedUser = NOT_LOGGED_UESR;
     assert.throws(() => {
-      tripService.getTripsByUser(targetUser);
+      tripService.getTripsByUser(targetUser, NOT_LOGGED_UESR);
     });
   });
 
   it('should not return trips when logged User is not a friend', () => {
-    loggedUser = LOGGED_USER; // without friends
-    const trips = tripService.getTripsByUser(targetUser);
+    const trips = tripService.getTripsByUser(targetUser, LOGGED_USER);
     assert.equal(trips.length, 0);
   });
 
@@ -42,7 +37,7 @@ describe('TripService', () => {
     const targetUser = new User('Mery', [new Trip(), new Trip()], [loggedUser]);
     loggedUser.addFriend(targetUser);
 
-    const trips = tripService.getTripsByUser(targetUser);
+    const trips = tripService.getTripsByUser(targetUser, loggedUser);
 
     assert.equal(trips.length, 2);
   });
