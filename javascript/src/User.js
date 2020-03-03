@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = class User {
-  constructor(trips, friends) {
+  constructor(name, trips = [], friends = []) {
+    this.name = name;
     this.trips = trips;
     this.friends = friends;
   }
@@ -16,9 +17,5 @@ module.exports = class User {
 
   addTrip(trip) {
     this.trips.add(trip);
-  }
-
-  trips() {
-    return this.trips;
   }
 };
