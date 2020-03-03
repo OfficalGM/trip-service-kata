@@ -18,4 +18,8 @@ module.exports = class User {
   addTrip(trip) {
     this.trips.add(trip);
   }
+
+  isFriendsWith(user) {
+    return this.friends.some(friend => friend == user);
+  }
 };
