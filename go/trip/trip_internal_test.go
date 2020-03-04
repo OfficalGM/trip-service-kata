@@ -27,6 +27,13 @@ func TestService_GetTripsByUser(t *testing.T) {
 			want:                nil,
 			wantErr:             true,
 		},
+		{
+			name:                "Logged in user is not a friend of the user",
+			user:                User{name: "Eric", friends: []User{{name: "9N"}, {name: "Tzu"}}},
+			fakeGetLoggedUserFn: fakeGetLoggedUser(&User{name: "River"}, nil),
+			want:                []Trip{},
+			wantErr:             false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
