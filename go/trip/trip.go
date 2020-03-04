@@ -4,13 +4,13 @@ import (
 	"errors"
 )
 
-type Trip struct{}
-
-type Service struct{}
-
 var getLoggedUser = func() (*User, error) {
 	return NewSession().GetLoggedUser()
 }
+
+type Trip struct{}
+
+type Service struct{}
 
 func NewService() *Service {
 	return &Service{}

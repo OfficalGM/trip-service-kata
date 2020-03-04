@@ -5,13 +5,17 @@ import (
 )
 
 var (
-	sess *Session
+	sess UserSession
 	once sync.Once
 )
 
+type UserSession interface {
+	GetLoggedUser() (*User, error)
+}
+
 type Session struct{}
 
-func NewSession() *Session {
+func NewSession() UserSession {
 	once.Do(func() {
 		sess = &Session{}
 	})
