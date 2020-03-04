@@ -6,14 +6,18 @@ import (
 
 type Trip struct{}
 
-type Service struct{}
+type Service struct {
+	sess UserSession
+}
 
-func NewService() *Service {
-	return &Service{}
+func NewService(sess UserSession) *Service {
+	return &Service{
+		sess: sess,
+	}
 }
 
 func (s *Service) GetTripsByUser(user User) ([]Trip, error) {
-	loggedUser, err := NewSession().GetLoggedUser()
+	loggedUser, err := s.sess.GetLoggedUser()
 	if err != nil {
 		return nil, err
 	}

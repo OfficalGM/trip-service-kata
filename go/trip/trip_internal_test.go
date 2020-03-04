@@ -71,10 +71,8 @@ func TestService_GetTripsByUser(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			NewSession()
-			sess = tt.fakeSession
 			FindTripsByUser = tt.fakeFindTripsByUserFn
-			got, err := NewService().GetTripsByUser(tt.user)
+			got, err := NewService(tt.fakeSession).GetTripsByUser(tt.user)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetTripsByUser() error = %v, wantErr %v", err, tt.wantErr)
 				return
