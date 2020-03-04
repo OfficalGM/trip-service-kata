@@ -1,6 +1,7 @@
 package trip
 
 import (
+	"errors"
 	"reflect"
 	"testing"
 )
@@ -48,6 +49,14 @@ func TestService_GetTripsByUser(t *testing.T) {
 			fakeFindTripsByUserFn: fakeFindTripsByUser([]Trip{{}, {}}, nil),
 			want:                  []Trip{{}, {}},
 			wantErr:               false,
+		},
+		{
+			name:                  "FindTripsByUser error",
+			user:                  User{name: "Eric", friends: []User{{name: "9N"}, {name: "Tzu"}}},
+			fakeGetLoggedUserFn:   fakeGetLoggedUser(&User{name: "9N"}, nil),
+			fakeFindTripsByUserFn: fakeFindTripsByUser(nil, errors.New("error")),
+			want:                  nil,
+			wantErr:               true,
 		},
 	}
 	for _, tt := range tests {
