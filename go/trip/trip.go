@@ -8,12 +8,16 @@ type Trip struct{}
 
 type Service struct{}
 
+var getLoggedUser = func() (*User, error) {
+	return NewSession().GetLoggedUser()
+}
+
 func NewService() *Service {
 	return &Service{}
 }
 
 func (s *Service) GetTripsByUser(user User) ([]Trip, error) {
-	loggedUser, err := NewSession().GetLoggedUser()
+	loggedUser, err := getLoggedUser()
 	if err != nil {
 		return nil, err
 	}
