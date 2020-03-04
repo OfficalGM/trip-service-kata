@@ -11,14 +11,21 @@ func fakeGetLoggedUser(user *User, err error) func() (*User, error) {
 	}
 }
 
+func fakeFindTripsByUser(trips []Trip, err error) func(User) ([]Trip, error) {
+	return func(User) ([]Trip, error) {
+		return trips, err
+	}
+}
+
 func TestService_GetTripsByUser(t *testing.T) {
 
 	tests := []struct {
-		name                string
-		user                User
-		fakeGetLoggedUserFn func() (*User, error)
-		want                []Trip
-		wantErr             bool
+		name                  string
+		user                  User
+		fakeGetLoggedUserFn   func() (*User, error)
+		fakeFindTripsByUserFn func(User) ([]Trip, error)
+		want                  []Trip
+		wantErr               bool
 	}{
 		{
 			name:                "Not logged in user",
@@ -34,10 +41,19 @@ func TestService_GetTripsByUser(t *testing.T) {
 			want:                []Trip{},
 			wantErr:             false,
 		},
+		{
+			name:                  "Logged in user is a friend of the user",
+			user:                  User{name: "Eric", friends: []User{{name: "9N"}, {name: "Tzu"}}},
+			fakeGetLoggedUserFn:   fakeGetLoggedUser(&User{name: "9N"}, nil),
+			fakeFindTripsByUserFn: fakeFindTripsByUser([]Trip{{}, {}}, nil),
+			want:                  []Trip{{}, {}},
+			wantErr:               false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			getLoggedUser = tt.fakeGetLoggedUserFn
+			FindTripsByUser = tt.fakeFindTripsByUserFn
 			got, err := NewService().GetTripsByUser(tt.user)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetTripsByUser() error = %v, wantErr %v", err, tt.wantErr)
