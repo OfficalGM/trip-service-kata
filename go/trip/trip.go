@@ -22,16 +22,16 @@ func (s *Service) GetTripsByUser(user User) ([]Trip, error) {
 		return nil, err
 	}
 
-	isFriend := false
-	if loggedUser != nil {
-		for _, friend := range user.GetFriends() {
-			if friend.GetName() == loggedUser.GetName() {
-				isFriend = true
-				break
-			}
-		}
-	} else {
+	if loggedUser == nil {
 		return nil, errors.New("loggedUser is nil")
+	}
+
+	isFriend := false
+	for _, friend := range user.GetFriends() {
+		if friend.GetName() == loggedUser.GetName() {
+			isFriend = true
+			break
+		}
 	}
 
 	trips := []Trip{}
