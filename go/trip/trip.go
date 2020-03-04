@@ -4,10 +4,6 @@ import (
 	"errors"
 )
 
-var getLoggedUser = func() (*User, error) {
-	return NewSession().GetLoggedUser()
-}
-
 type Trip struct{}
 
 type Service struct{}
@@ -17,7 +13,7 @@ func NewService() *Service {
 }
 
 func (s *Service) GetTripsByUser(user User) ([]Trip, error) {
-	loggedUser, err := getLoggedUser()
+	loggedUser, err := NewSession().GetLoggedUser()
 	if err != nil {
 		return nil, err
 	}
