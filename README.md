@@ -57,7 +57,7 @@ Extract Interface from the dependencies with side effects of `TripService` to ma
 
 For privacy concerns, we want to add an attribute `public` to `Trip` which default is true. If the `trip.public` is false, then even your friends cannot access this trip by `TripService.getTripsByUser`.
 
-Example:
+Specification by example:
 
 ```gherkin
   Scenario: You cannot access trips that was not public event though the owner is your friend
