@@ -1,18 +1,21 @@
 package trip
 
 import (
-	"errors"
 	"sync"
 )
 
 var (
-	sess *Session
+	sess UserSession
 	once sync.Once
 )
 
+type UserSession interface {
+	GetLoggedUser() (*User, error)
+}
+
 type Session struct{}
 
-func NewSession() *Session {
+func NewSession() UserSession {
 	once.Do(func() {
 		sess = &Session{}
 	})
@@ -20,9 +23,9 @@ func NewSession() *Session {
 }
 
 func (s *Session) IsUserLoggedIn(user User) (bool, error) {
-	return false, errors.New("trip.IsUserLoggedIn should not be called in an unit test")
+	panic("trip.IsUserLoggedIn should not be called in an unit test")
 }
 
 func (s *Session) GetLoggedUser() (*User, error) {
-	return nil, errors.New("trip.GetLoggedUser should not be called in an unit test")
+	panic("trip.GetLoggedUser should not be called in an unit test")
 }
