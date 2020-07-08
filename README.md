@@ -55,7 +55,7 @@ Extract Interface from the dependencies with side effects of `TripService` to ma
 
 ## Lesson 3 - Make changes
 
-For privacy concerns, we want to add an attribute `public` to `Trip` which default is true. If the `trip.public` is false, then even your friends cannot access this trip by `TripService.getTripsByUser`.
+For privacy concerns, we want to add an attribute `public` to `Trip` which is true by default. If the `trip.public` is false, then even your friends cannot access this trip by `TripService.getTripsByUser`.
 
 Specification by example:
 
