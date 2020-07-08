@@ -66,8 +66,8 @@ Example:
       | trip | public |
       | Ta   | true   |
       | Tb   | false  |
-    When Bar request Bar's trip list
-    Then it should display Ta
+    When Foo request Bar's trip list
+    Then it should display Ta only
 ```
 
 ## Retrospective
