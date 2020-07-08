@@ -38,7 +38,7 @@ Extract Interface from the dependencies with side effects of `TripService` to ma
   - It should get a list of trips from a user if the user is your friend
   - It should not get a list of trips from a user if the user is not your friend
   - It should throw UserNotLoggedInException if you are not logged in
-- Two extra protected methods to in `TripService`
+- Two extra interfaces
 
 <details><summary>Tips in case you need</summary>
 <p>1. Create an interface `IUserSession` and put methods you need in `UserSession` into it.
