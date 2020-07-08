@@ -21,13 +21,11 @@ Extract all the dependencies with side effects related code to make `TripService
 - Two extra protected methods to in `TripService`
 
 <details><summary>Tips in case you need</summary>
-<p>
-1. Highlight the part to `getLoggedUser` and do `Extract Method` to replace with a new protected method
-2. Highlight the part to `findTripsByUser` and do `Extract Method` to replace with a new protected method
-3. Create a test file
-4. In the test file, create a child class of `TripService` and override the two protected methods mentioned above to return fixed data
-5. In the test file, create some test cases with some fake data.
-</p>
+<p>1. Highlight the part to `getLoggedUser` and do `Extract Method` to replace with a new protected method
+<p>2. Highlight the part to `findTripsByUser` and do `Extract Method` to replace with a new protected method
+<p>3. Create a test file
+<p>4. In the test file, create a child class of `TripService` and override the two protected methods mentioned above to return fixed data
+<p>5. In the test file, create some test cases with some fake data.
 </details>
 
 ## Lesson 2 - Extract Interface
@@ -43,18 +41,16 @@ Extract Interface from the dependencies with side effects of `TripService` to ma
 - Two extra protected methods to in `TripService`
 
 <details><summary>Tips in case you need</summary>
-<p>
-1. Create an interface `IUserSession` and put methods you need in `UserSession` into it.
-2. Make the `UserSession` implements the interface
-3. Create an interface `ITripDAO` and put methods you need in `TripDAO` into it.
-4. Make the `TripDAO` implements the interface
-5. Create a test file
-6. In the test file, create subclasses of the two interfaces mentioned above and return fixed data.
-7. In the test file, create a test case to make it fail
-8. In the `TripService`, dependency inject the two modules into the constructor of the `TripService`
-9. In the `TripService`, change the dependency modules to the interface.
-10. Go back to the tests, pass the subclasses you created in step 6 to the test cases and make tests pass.
-</p>
+<p>1. Create an interface `IUserSession` and put methods you need in `UserSession` into it.
+<p>2. Make the `UserSession` implements the interface
+<p>3. Create an interface `ITripDAO` and put methods you need in `TripDAO` into it.
+<p>4. Make the `TripDAO` implements the interface
+<p>5. Create a test file
+<p>6. In the test file, create subclasses of the two interfaces mentioned above and return fixed data.
+<p>7. In the test file, create a test case to make it fail
+<p>8. In the `TripService`, dependency inject the two modules into the constructor of the `TripService`
+<p>9. In the `TripService`, change the dependency modules to the interface.
+<p>10. Go back to the tests, pass the subclasses you created in step 6 to the test cases and make tests pass.
 </details>
 
 ## Lesson 3 - Make changes
