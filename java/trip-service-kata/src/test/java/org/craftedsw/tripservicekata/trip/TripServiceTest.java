@@ -19,5 +19,5 @@ public class TripServiceTest {
         }).isInstanceOf(CollaboratorCallException.class);
 
     }
-    
+
 }
