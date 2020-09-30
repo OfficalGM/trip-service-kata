@@ -7,18 +7,18 @@ import org.craftedsw.tripservicekata.trip.Trip;
 
 public class User {
 
-    private List<Trip> trips = new ArrayList<Trip>();
-    private List<User> friends = new ArrayList<User>();
+    private List<Trip> trips;
+    private List<User> friends;
 
     public User() {
-
+        trips = new ArrayList<>();
+        friends = new ArrayList<User>();
     }
 
     User(List<Trip> trips, List<User> friends) {
         this.trips = trips;
         this.friends = friends;
     }
-
 
     public List<User> getFriends() {
         return friends;
@@ -38,6 +38,10 @@ public class User {
 
     public List<Trip> getTrips() {
         return trips;
+    }
+
+    public boolean isFriendWith(User friend) {
+        return friends.contains(friend);
     }
 
     public static UserBuilder builder() {
@@ -60,6 +64,12 @@ public class User {
         }
 
         public User build() {
+            if (trips == null) {
+                trips = new ArrayList<>();
+            }
+            if (friends == null) {
+                friends = new ArrayList<>();
+            }
             return new User(trips, friends);
         }
 
