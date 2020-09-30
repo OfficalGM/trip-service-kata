@@ -4,11 +4,17 @@ import org.craftedsw.tripservicekata.exception.CollaboratorCallException;
 import org.craftedsw.tripservicekata.user.User;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TripServiceTest {
 
     User isLoggedUser = new User();
+
+    Trip trip = new Trip();
 
     @Test
     public void test_1() {
@@ -34,6 +40,17 @@ public class TripServiceTest {
         }).isInstanceOf(CollaboratorCallException.class).hasMessage("TripDAO should not be invoked on an unit test.");
     }
 
+    @Test
+    public void test_3() {
+        TripService tripService = new FakeTripService2();
+
+        User user = new User();
+        user.addFriend(isLoggedUser);
+
+        final List<Trip> resultList = tripService.getTripsByUser(user);
+
+        assertThat(resultList).hasSize(1);
+    }
 
     class FakeTripService extends TripService {
 
@@ -43,5 +60,18 @@ public class TripServiceTest {
         }
     }
 
+    class FakeTripService2 extends TripService {
+        @Override
+        User getLoggedUser() {
+            return isLoggedUser;
+        }
+
+        @Override
+        List<Trip> findTripsByUser(User user) {
+            List<Trip> tripList = new ArrayList<>();
+            tripList.add(trip);
+            return tripList;
+        }
+    }
 
 }
